@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Trackers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        .upload-section, .url-section {
+            margin-bottom: 20px;
+        }
+        input[type="file"], input[type="url"] {
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+            padding: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            color: white;
+            font-size: 16px;
+        }
+        .logistic-btn {
+            background-color: #4CAF50;
+        }
+        .cnn-btn {
+            background-color: #2196F3;
+        }
+        .clear-btn {
+            background-color: #f44336;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .review-item {
+            margin-bottom: 10px;
+        }
+        .positive {
+            color: green;
+        }
+        .negative {
+            color: red;
+        }
+    </style>
+    <script>
+        async function analyzeFile(modelType) {
+            const formData = new FormData(document.getElementById('uploadForm'));
+            formData.append('model_type', modelType);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            document.getElementById('positiveList').innerHTML = '';
+            document.getElementById('negativeList').innerHTML = '';
+
+            result.positive_reviews.forEach(review => {
+                const li = document.createElement('li');
+                li.className = 'positive';
+                li.textContent = review;
+                document.getElementById('positiveList').appendChild(li);
+            });
+
+            result.negative_reviews.forEach(review => {
+                const li = document.createElement('li');
+                li.className = 'negative';
+                li.textContent = review;
+                document.getElementById('negativeList').appendChild(li);
+            });
+        }
+
+        function clearResults() {
+            document.getElementById('csvFile').value = "";
+            document.getElementById('urlInput').value = "";
+            document.getElementById('positiveList').innerHTML = '';
+            document.getElementById('negativeList').innerHTML = '';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Review Trackers</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="upload-section">
+                <label for="csvFile">Upload CSV File:</label>
+                <input type="file" id="csvFile" name="file" accept=".csv">
+            </div>
+            <div class="url-section">
+                <label for="urlInput">Enter URL:</label>
+                <input type="url" id="urlInput" name="url" placeholder="https://example.com/reviews" required>
+            </div>
+            <button type="button" class="logistic-btn" onclick="analyzeFile('logistic')">Analyze 1 (Logistic)</button>
+            <button type="button" class="cnn-btn" onclick="analyzeFile('cnn')">Analyze 2 (CNN)</button>
+            <button type="button" class="clear-btn" onclick="clearResults()">Clear</button>
+        </form>
+        <div class="results" id="results">
+            <div class="category" id="positiveResults">
+                <h3>Positive Reviews:</h3>
+                <ul id="positiveList"></ul>
+            </div>
+            <div class="category" id="negativeResults">
+                <h3>Negative Reviews:</h3>
+                <ul id="negativeList"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
