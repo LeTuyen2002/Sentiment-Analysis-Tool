@@ -7,7 +7,11 @@ The **Sentiment Analysis Tool** is a machine learning-based application designed
 - **Automated Review Scraping**
 
 ## 🎥 Demo Video:
-...
+
+[![Demo Video](https://img.youtube.com/vi/6eAM4oHmN5o/0.jpg)](https://www.youtube.com/watch?v=6eAM4oHmN5o)
+
+Click the image above to watch the demo video.
+
 
 ## 📂 Project Structure
 Positive_Negative_Comments/
