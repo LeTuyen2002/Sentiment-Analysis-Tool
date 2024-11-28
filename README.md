@@ -83,7 +83,7 @@ When you run the project:
 ## 📧 Contact
 - **Author**: Le Tuyen
 - **Email**: [trungtuyenlevn@gmail.com](mailto:trungtuyenlevn@gmail.com)
-- **GitHub**: [LeTuyen2002](https://github.com/LeTuyen2002)
+- **GitHub**: [TuyenTrungLe](https://github.com/TuyenTrungLe)
 
 ## 🤝 Contributions
 Contributions are welcome! Feel free to:
