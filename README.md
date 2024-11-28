@@ -14,6 +14,7 @@ Click the image above to watch the demo video.
 
 
 ## 📂 Project Structure
+```plaintext
 Positive_Negative_Comments/
 ├── app.py                    # Your main Python file
 ├── sentiment_model.pkl       # Pre-trained logistic regression model
@@ -24,6 +25,7 @@ Positive_Negative_Comments/
 ├── templates/                # Folder for HTML files
 │   ├── index.html
 ├── README.md                 # Documentation for the project (to be created)
+```
 
 ## 🛠️ Features
 1. **Sentiment Classification**:
